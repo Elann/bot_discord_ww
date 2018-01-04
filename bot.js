@@ -21,7 +21,7 @@ const bot = new Discord.Client({
    autorun: true
 });
 
-//bot.login(process.env.BOT_TOKEN);
+bot.login(process.env.BOT_TOKEN);
 
 bot.on('ready', function (evt) {
     logger.info('Connected');
