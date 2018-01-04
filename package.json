@@ -11,13 +11,13 @@
     "express": "^4.15.3",
     "winston": "^2.4.0"
   }
-}
+},
 {
    "engines": {
       "node": "7.10.1",
       "npm": "4.2.0"
   },
-}
+},
 {
    "scripts": {
     "start": "node bot.js",
