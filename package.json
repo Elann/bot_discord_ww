@@ -4,11 +4,6 @@
   "description": "My own Discord bot",
   "main": "bot.js",
   "author": "Elann",
-  
-  "scripts": {
-    "start": "node bot.js",
-  },
-  
   "dependencies": {
     "discord.io": "^2.5.3",
     "discord.js": "^11.1.0",
@@ -21,5 +16,10 @@
    "engines": {
       "node": "7.10.1",
       "npm": "4.2.0"
+  },
+}
+{
+   "scripts": {
+    "start": "node bot.js",
   },
 }
