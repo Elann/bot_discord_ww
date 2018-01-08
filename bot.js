@@ -1,4 +1,3 @@
-console.log("pas commence");
 var Discord = require('discord.io');
 var logger = require('winston');
 //var auth = require('./auth.json');
@@ -16,13 +15,11 @@ logger.add(logger.transports.Console, {
 });
 logger.level = 'debug';
 
-console.log("pas de token");
 // Initialize Discord Bot
 const bot = new Discord.Client({
    token: process.env.TOKEN, //auth.token,
    autorun: true
 });
-console.log("token");
 
 //bot.login(process.env.TOKEN);
 
@@ -31,8 +28,6 @@ bot.on('ready', function (evt) {
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
-
-console.log("après ready");
 
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
