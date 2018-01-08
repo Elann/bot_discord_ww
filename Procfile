@@ -1,2 +1,2 @@
-worker: node bot.js
 ps:scale worker=1
+worker: node bot.js
