@@ -15,19 +15,23 @@ logger.add(logger.transports.Console, {
 });
 logger.level = 'debug';
 
+console.log("pas de token");
 // Initialize Discord Bot
 const bot = new Discord.Client({
-   token: auth.token,
+   token: process.env.TOKEN, //auth.token,
    autorun: true
 });
+console.log("token");
 
-//bot.login(process.env.BOT_TOKEN);
+//bot.login(process.env.TOKEN);
 
 bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
+
+console.log("après ready");
 
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
