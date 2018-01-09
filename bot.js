@@ -91,13 +91,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         message: 'Ok, WW à ' + deb_hour + 'h' + deb_min + ' pour ' + args[2] + ' minutes ! Fin à ' + fin_hour + 'h' + fin_min + ' !'
                     });
                     
-                    console.log("heure de début " + heure_deb_ww);
-                    var heure_deb_ww_utc = new Date(heure_deb_ww);
-                    heure_deb_ww_utc.setMinutes(heure_deb_ww.getMinutes() - heure_deb_ww.getTimezoneOffset())
-                    var heure_fin_ww_utc = new Date(heure_fin_ww);
-                    heure_deb_ww_utc.setMinutes(heure_fin_ww.getMinutes() - heure_fin_ww.getTimezoneOffset())
-                    console.log("heure de début utc " + heure_deb_ww_utc);
-                    
                     //Schedule the beginning of the WW
                     schedule.scheduleJob('WW', heure_deb_ww_utc, function(params)
                     {
