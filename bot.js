@@ -91,8 +91,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         message: 'Ok, WW à ' + deb_hour + 'h' + deb_min + ' pour ' + args[2] + ' minutes ! Fin à ' + fin_hour + 'h' + fin_min + ' !'
                     });
                     
+                    console.log("heure de début " + heure_deb_ww);
+                    var heure_deb_ww_utc = new Date(heure_deb_ww.getTime() + heure_deb_ww.getTimezoneOffset() * 60000);
+                    var heure_fin_ww_utc = new Date(heure_deb_ww.getTime() + heure_deb_ww.getTimezoneOffset() * 60000);
+                    console.log("heure de début utc " + heure_deb_ww_utc);
+                    
                     //Schedule the beginning of the WW
-                    schedule.scheduleJob('WW', heure_deb_ww, function(params)
+                    schedule.scheduleJob('WW', heure_deb_ww_utc, function(params)
                     {
                       //Message beginning of the WW
                       bot.sendMessage({
@@ -124,3 +129,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
          }
      }
 });
+
+/* TODO
+- Donner un nom à la WW
+- Ajouter des gens à une WW
+- Annuler une WW
+- Afficher les WW
+*/
