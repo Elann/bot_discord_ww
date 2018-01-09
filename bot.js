@@ -92,8 +92,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     });
                     
                     console.log("heure de début " + heure_deb_ww);
-                    var heure_deb_ww_utc = new Date(heure_deb_ww.getTime() + heure_deb_ww.getTimezoneOffset() * 60000);
-                    var heure_fin_ww_utc = new Date(heure_deb_ww.getTime() + heure_deb_ww.getTimezoneOffset() * 60000);
+                    var heure_deb_ww_utc = new Date(heure_deb_ww);
+                    heure_deb_ww_utc.setMinutes(heure_deb_ww.getMinutes() - heure_deb_ww.getTimezoneOffset())
+                    var heure_fin_ww_utc = new Date(heure_fin_ww);
+                    heure_deb_ww_utc.setMinutes(heure_fin_ww.getMinutes() - heure_fin_ww.getTimezoneOffset())
                     console.log("heure de début utc " + heure_deb_ww_utc);
                     
                     //Schedule the beginning of the WW
@@ -108,7 +110,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     }.bind(null, null));
                     
                     //Schedule the end of the WW
-                    schedule.scheduleJob('WW', heure_fin_ww, function(params)
+                    schedule.scheduleJob('WW', heure_fin_ww_utc, function(params)
                     {
                       //Message end of the WW
                       bot.sendMessage({
