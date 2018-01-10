@@ -153,7 +153,20 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     });
                 }
                 break;
-            // Just add any case commands if you want to..
+                
+            case 'wwkill':
+                if (args.length == 2) {
+                    var name_ww_to_delete = args[1];
+                    delete_ww(name_ww_to_delete);
+                    console.log(list_ww);
+                }
+                else {
+                     bot.sendMessage({
+                        to: channelID,
+                        message: 'Veuillez indiquer la suppression de la Word War au format```!wwkill nomDeLaWW```'
+                    });
+                    break
+                }
          }
      }
 });
