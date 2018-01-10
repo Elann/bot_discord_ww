@@ -55,7 +55,7 @@ function is_in_list_ww(name) {
     return false;
 }
 
-function deb_and_end_ww(name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min) {
+function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min) {
     //Schedule the beginning of the WW
     schedule.scheduleJob('WW', heure_deb_ww, function(params)
     {
@@ -162,7 +162,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     
                     console.log(list_ww);
                     
-                    deb_and_end_ww(name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min);
+                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min);
                 
                 }
                 else {
