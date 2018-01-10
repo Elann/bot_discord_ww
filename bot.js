@@ -198,9 +198,9 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 var arrayLength = list_ww.length;
                 var message_to_display = "";
                 for (var i = 0; i < arrayLength; i++) {
-                    var name_i = list_ww[0];
-                    var deb_i = list_ww[1];
-                    var fin_i = list_ww[2];
+                    var name_i = list_ww[i][0];
+                    var deb_i = list_ww[i][1];
+                    var fin_i = list_ww[i][2];
                     
                     message_to_display = message_to_display + "WW " + name_i + " de " + deb_i + " à " + fin_i + "\n";
                 }
