@@ -77,7 +77,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_de
     {
         if (is_in_list_ww(name_ww)) {
         
-            var runners = list_ww[i][3];
+            var runners = list_ww[index_ww(name_ww)][3];
         
             //Message beginning of the WW
             bot.sendMessage({
