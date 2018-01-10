@@ -31,6 +31,20 @@ bot.on('ready', function (evt) {
 
 var list_ww = [];
 
+function delete_ww(name) {
+    var index = -1;
+    var arrayLength = list_ww.length;
+    for (var i = 0; i < arrayLength; i++) {
+        if (list_ww[i][0] == name) {
+            index = i
+            break;
+        }
+    }
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+}
+
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
@@ -64,7 +78,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 var nbr_minutes_ww = parseInt(args[2]);
                 //Get name
                 var name_ww = "";
-                if (args.length == 4) {
+                if (args.length >= 4) {
                     name_ww = args[3];
                 }
                 else {
@@ -128,6 +142,9 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                       });
 
                     }.bind(null, null));
+                    
+                    delete_ww(name_ww);
+                    console.log(list_ww);
                 }
                 else {
                     bot.sendMessage({
