@@ -63,7 +63,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, nbr_minu
     //Message acceptation of the WW
     bot.sendMessage({
         to: channelID,
-        message: 'Ok, la WW ' + name_ww + ' commencera à ' + heure_deb_to_display + ' pour ' + nbr_minutes_ww + ' ! '
+        message: 'Ok, la WW ' + name_ww + ' commencera à ' + heure_deb_to_display + ' pour ' + nbr_minutes_ww + ' minutes ! '
     });
 
     //Schedule the beginning of the WW
@@ -113,7 +113,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 else {
                     bot.sendMessage({
                         to: channelID,
-                        message: 'Veuillez indiquer votre Word War au format (les arguments entre crochets sont optionnels) ```!ww heureDeDépart NombreDeMinutes [NomDeLaWW]```'
+                        message: 'Pour annoncer une WW (les arguments entre crochets sont optionnels) : ```!ww heureDeDépart NombreDeMinutes [NomDeLaWW]```'
                     });
                     break
                 }
@@ -134,6 +134,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
                 else {
                     name_ww = args[1]+args[2];
+                }
+                if (is_in_list_ww(name_ww)) {
+                    bot.sendMessage({
+                        to: channelID,
+                        message: 'Le nom de la WW est déjà pris ! Il faut trouver autre chose...'
+                    });
+                    break
                 }
                 
                 //Hour and minutes are between 0-24 and 0-59
@@ -162,7 +169,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 else {
                     bot.sendMessage({
                         to: channelID,
-                        message: 'Veuillez indiquer une heure valide.'
+                        message: 'L\'heure indiquée n\'est pas valide !'
                     });
                 }
                 break;
@@ -176,7 +183,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 else {
                      bot.sendMessage({
                         to: channelID,
-                        message: 'Veuillez indiquer la suppression de la Word War au format```!wwkill nomDeLaWW```'
+                        message: 'Pour supprimer une Word War : ```!wwkill nomDeLaWW```'
                     });
                     break
                 }
