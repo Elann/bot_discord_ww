@@ -55,7 +55,7 @@ function is_in_list_ww(name) {
     return false;
 }
 
-function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww) {
+function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, nbr_minutes_ww) {
 
     var heure_deb_to_display = heure_deb_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
     var heure_fin_to_display = heure_fin_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
@@ -156,7 +156,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     console.log(list_ww);
                     
                     //begin and end of the WW
-                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww);
+                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, nbr_minutes_ww);
                 
                 }
                 else {
