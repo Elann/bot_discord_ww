@@ -48,7 +48,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 else {
                     bot.sendMessage({
                         to: channelID,
-                        message: 'Veuillez indiquer votre Word War au format ```!ww heureDeDépart NombreDeMinutes [NomDeLaWW] (les arguments entre crochets sont optionnels)```'
+                        message: 'Veuillez indiquer votre Word War au format (les arguments entre crochets sont optionnels) ```!ww heureDeDépart NombreDeMinutes [NomDeLaWW]```'
                     });
                     break
                 }
@@ -102,10 +102,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     //Message acceptation of the WW
                     bot.sendMessage({
                         to: channelID,
-                        message: 'Ok, WW ' + name_ww + 'à ' + deb_hour + 'h' + deb_min + ' pour ' + args[2] + ' minutes ! Fin à ' + fin_hour + 'h' + fin_min + ' !'
+                        message: 'Ok, WW ' + name_ww + ' à ' + deb_hour + 'h' + deb_min + ' pour ' + args[2] + ' minutes ! Fin à ' + fin_hour + 'h' + fin_min + ' !'
                     });
                     
-                    console.log("Liste des WW " + list_ww);
+                    console.log(list_ww);
                     
                     //Schedule the beginning of the WW
                     schedule.scheduleJob('WW', heure_deb_ww, function(params)
