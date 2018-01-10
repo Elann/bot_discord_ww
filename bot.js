@@ -160,7 +160,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         message: 'Ok, WW ' + name_ww + ' à ' + deb_hour + 'h' + deb_min + ' pour ' + args[2] + ' minutes ! Fin à ' + fin_hour + 'h' + fin_min + ' !'
                     });
                     
-                    console.log("heure de début : " + heure_deb_ww.toString([], {hour: '2-digit', minute:'2-digit'}));
+                    console.log("heure de début : " + heure_deb_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false}));
                     console.log(list_ww);
                     
                     deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min);
