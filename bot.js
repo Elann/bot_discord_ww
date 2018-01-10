@@ -151,7 +151,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
                 
                 //Hour and minutes are between 0-24 and 0-59
-                if (hour >= 0 && hour < 25 && minutes >=0 && minutes < 60 && nbr_minutes_ww != NaN) {
+                if (hour >= 0 && hour < 25 && minutes >=0 && minutes < 60 && not isNaN(nbr_minutes_ww)) {
                 
                     var heure_deb_ww = new Date();
                     heure_deb_ww.setHours(hour, minutes, 0);
