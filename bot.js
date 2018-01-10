@@ -56,9 +56,6 @@ function is_in_list_ww(name) {
 }
 
 function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, nbr_minutes_ww) {
-
-    var heure_deb_to_display = heure_deb_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-    var heure_fin_to_display = heure_fin_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
     
     //Message acceptation of the WW
     bot.sendMessage({
@@ -158,7 +155,9 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     }
                     
                     //Add WW to list
-                    list_ww.push([name_ww, heure_deb_ww, heure_fin_ww]);
+                    var heure_deb_to_display = heure_deb_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+                    var heure_fin_to_display = heure_fin_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+                    list_ww.push([name_ww, heure_deb_to_display, heure_fin_to_display]);
                     
                     console.log(list_ww);
                     
@@ -202,10 +201,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     var deb_i = list_ww[1];
                     var fin_i = list_ww[2];
                     
-                    var deb_i_display = deb_i.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-                    var fin_i_display = fin_i.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-                    
-                    message_to_display = message_to_display + "WW " + name_i + " de " + deb_i_display + " à " + fin_i_display + "\n";
+                    message_to_display = message_to_display + "WW " + name_i + " de " + deb_i + " à " + fin_i + "\n";
                 }
                     bot.sendMessage({
                         to: channelID,
