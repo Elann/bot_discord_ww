@@ -55,7 +55,7 @@ function is_in_list_ww(name) {
     return false;
 }
 
-function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_deb_to_display, heure_fin_to_display, nbr_minutes_ww) {
+function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_deb_to_display, heure_fin_to_display, nbr_minutes_ww, runners) {
     
     //Message acceptation of the WW
     bot.sendMessage({
@@ -71,7 +71,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_de
             //Message beginning of the WW
             bot.sendMessage({
                   to: channelID,
-                  message: 'C\'est partiiiiiiiiiiiiii !\nDébut de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ' !'
+                  message: 'C\'est partiiiiiiiiiiiiii !\nDébut de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + runners + ' !' 
             });
           
             //Schedule the end of the WW
@@ -110,7 +110,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 else {
                     bot.sendMessage({
                         to: channelID,
-                        message: 'Pour annoncer une WW (les arguments entre crochets sont optionnels) : ```!ww heureDeDépart NombreDeMinutes [NomDeLaWW]```'
+                        message: 'Pour annoncer une WW (les arguments entre crochets sont optionnels) : ```!ww heureDeDépart NombreDeMinutes [NomDeLaWW] [@Participant1 @Participant2 ...]```'
                     });
                     break
                 }
@@ -124,6 +124,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     var minutes = 00;
                 }
                 var nbr_minutes_ww = parseInt(args[2]);
+                
                 //Get name
                 var name_ww = "";
                 if (args.length >= 4) {
@@ -138,6 +139,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         message: 'Le nom de la WW est déjà pris ! Il faut trouver autre chose...'
                     });
                     break
+                }
+                
+                //Get runners
+                if (args.length >= 5) {
+                    var runners = args[4:args.length-1];
+                }
+                else {
+                    var runners = [];
                 }
                 
                 //Hour and minutes are between 0-24 and 0-59
@@ -163,7 +172,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     console.log(list_ww);
                     
                     //begin and end of the WW
-                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_deb_to_display, heure_fin_to_display, nbr_minutes_ww);
+                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_deb_to_display, heure_fin_to_display, nbr_minutes_ww, runners);
                 
                 }
                 else {
@@ -217,5 +226,5 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 DONE - Donner un nom à la WW 
 - Ajouter des gens à une WW
 DONE - Annuler une WW
-- Afficher les WW
+DONE - Afficher les WW
 */
