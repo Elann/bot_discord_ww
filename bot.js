@@ -55,7 +55,16 @@ function is_in_list_ww(name) {
     return false;
 }
 
-function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_deb_to_display, heure_fin_to_display, nbr_minutes_ww, runners) {
+function index_ww(name) {
+    var arrayLength = list_ww.length;
+    for (var i = 0; i < arrayLength; i++) {
+        if (list_ww[i][0] == name) {
+            return i;
+        }
+    }
+}
+
+function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_deb_to_display, heure_fin_to_display, nbr_minutes_ww) {
     
     //Message acceptation of the WW
     bot.sendMessage({
@@ -67,6 +76,8 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_de
     schedule.scheduleJob('WW', heure_deb_ww, function(params)
     {
         if (is_in_list_ww(name_ww)) {
+        
+            var runners = list_ww[i][3];
         
             //Message beginning of the WW
             bot.sendMessage({
@@ -80,7 +91,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_de
                //Message end of the WW
                bot.sendMessage({
                      to: channelID,
-                     message: 'Stop !\nFin de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ' !'
+                     message: 'Stop !\nFin de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ', ' + runners.join(', ') + ' !'
                });
                   
                delete_ww(name_ww);
@@ -168,12 +179,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     var heure_deb_to_display = heure_deb_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
                     var heure_fin_to_display = heure_fin_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
                     
-                    list_ww.push([name_ww, heure_deb_to_display, heure_fin_to_display]);
+                    list_ww.push([name_ww, heure_deb_to_display, heure_fin_to_display, runners]);
                     
                     console.log(list_ww);
                     
                     //begin and end of the WW
-                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_deb_to_display, heure_fin_to_display, nbr_minutes_ww, runners);
+                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_deb_to_display, heure_fin_to_display, nbr_minutes_ww);
                 
                 }
                 else {
@@ -203,6 +214,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     });
                     break;
                 }
+                
+            case 'wwjoin':
+            
+                break
             
             case 'wwall':
                 var arrayLength = list_ww.length;
