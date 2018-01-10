@@ -55,7 +55,17 @@ function is_in_list_ww(name) {
     return false;
 }
 
-function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min) {
+function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww) {
+
+    var heure_deb_to_display = heure_deb_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+    var heure_fin_to_display = heure_fin_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+    
+    //Message acceptation of the WW
+    bot.sendMessage({
+        to: channelID,
+        message: 'Ok, la WW ' + name_ww + ' commencera à ' + heure_deb_to_display + ' pour ' + nbr_minutes_ww + ' ! '
+    });
+
     //Schedule the beginning of the WW
     schedule.scheduleJob('WW', heure_deb_ww, function(params)
     {
@@ -64,7 +74,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, deb_hour
             //Message beginning of the WW
             bot.sendMessage({
                   to: channelID,
-                  message: 'Début de la WW de ' + deb_hour + 'h' + deb_min + ' ! Fin prévue à ' + fin_hour + 'h' + fin_min + ' !'
+                  message: 'Début de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ' !'
             });
           
             //Schedule the end of the WW
@@ -73,7 +83,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, deb_hour
                //Message end of the WW
                bot.sendMessage({
                      to: channelID,
-                     message: 'Fin de la WW de ' + deb_hour + 'h' + deb_min + ' à ' + fin_hour + 'h' + fin_min + ' !'
+                     message: 'Fin de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ' !'
                });
                   
                delete_ww(name_ww);
@@ -134,17 +144,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     var heure_fin_ww = new Date(heure_deb_ww);
                     heure_fin_ww.setMinutes(heure_deb_ww.getMinutes() + nbr_minutes_ww);
                     
-                    var deb_hour = heure_deb_ww.getHours();
-                    var fin_hour = heure_fin_ww.getHours();
-                    var deb_min = heure_deb_ww.getMinutes();
-                    var fin_min = heure_fin_ww.getMinutes();
-                    if (deb_min < 10) {
-                        deb_min = '0'+ deb_min;
-                    }
-                    if (fin_min < 10) {
-                        fin_min = '0'+ fin_min;
-                    }
-                    
                     //if the ww is too late for today, it is for tomorrow
                     if (heure_deb_ww < Date.now()) {
                         heure_deb_ww.setDate(heure_deb_ww.getDate()+1);
@@ -152,17 +151,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     }
                     
                     //Add WW to list
-                    list_ww.push([name_ww,heure_deb_ww,heure_fin_ww]);
+                    list_ww.push([name_ww, heure_deb_ww, heure_fin_ww]);
+                     
                     
-                    //Message acceptation of the WW
-                    bot.sendMessage({
-                        to: channelID,
-                        message: 'Ok, WW ' + name_ww + ' à ' + deb_hour + 'h' + deb_min + ' pour ' + args[2] + ' minutes ! Fin à ' + fin_hour + 'h' + fin_min + ' !'
-                    });
-                    
-                    console.log("heure de début : " + heure_deb_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false}));
                     console.log(list_ww);
                     
+                    //begin and end of the WW
                     deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min);
                 
                 }
