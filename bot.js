@@ -216,6 +216,27 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
                 
             case 'wwjoin':
+                if (args.length >= 2) {
+                    var name_to_add = args[1];
+                    var runners_to_add = args.slice(2);
+                    if (is_in_list_ww(name_to_add)) {
+                        list_ww[index_ww(name_to_add)][3].concat(runners_to_add);
+                        bot.sendMessage({
+                            to: channelID,
+                            message: 'Participant⋅e⋅s ajouté⋅e⋅s !'
+                        });
+                    }
+                    else {
+                        break;
+                    }
+                }
+                else {
+                    bot.sendMessage({
+                        to: channelID,
+                        message: 'Pour ajouter des participant⋅e⋅s à une Word War : ```!wwjoin nomDeLaWW @participant1 @participant2...```'
+                    });
+                    break;
+                }
             
                 break
             
