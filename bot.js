@@ -63,7 +63,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, nbr_minu
     //Message acceptation of the WW
     bot.sendMessage({
         to: channelID,
-        message: 'Ok, la WW ' + name_ww + ' commencera à ' + heure_deb_to_display + ' pour ' + nbr_minutes_ww + ' minutes ! '
+        message: 'Ok, la WW \n' + name_ww + ' commencera à ' + heure_deb_to_display + ' pour ' + nbr_minutes_ww + ' minutes ! '
     });
 
     //Schedule the beginning of the WW
@@ -178,22 +178,35 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 if (args.length == 2) {
                     var name_ww_to_delete = args[1];
                     delete_ww(name_ww_to_delete);
+                    bot.sendMessage({
+                        to: channelID,
+                        message: 'Word War supprimée !'
+                    });
+                    
                     console.log(list_ww);
+                    break;
                 }
                 else {
-                     bot.sendMessage({
+                    bot.sendMessage({
                         to: channelID,
                         message: 'Pour supprimer une Word War : ```!wwkill nomDeLaWW```'
                     });
-                    break
+                    break;
                 }
+            
+            case 'wwall':
+                bot.sendMessage({
+                    to: channelID,
+                    message: 'Pour supprimer une Word War : ```!wwkill nomDeLaWW```'
+                });
+                break;
          }
      }
 });
 
 /* TODO
-- Donner un nom à la WW
+DONE - Donner un nom à la WW 
 - Ajouter des gens à une WW
-- Annuler une WW
+DONE - Annuler une WW
 - Afficher les WW
 */
