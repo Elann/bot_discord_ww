@@ -63,7 +63,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, nbr_minu
     //Message acceptation of the WW
     bot.sendMessage({
         to: channelID,
-        message: 'Ok, la WW \n' + name_ww + ' commencera à ' + heure_deb_to_display + ' pour ' + nbr_minutes_ww + ' minutes ! '
+        message: 'Ok, la WW ' + name_ww + ' commencera à ' + heure_deb_to_display + ' pour ' + nbr_minutes_ww + ' minutes ! '
     });
 
     //Schedule the beginning of the WW
@@ -74,7 +74,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, nbr_minu
             //Message beginning of the WW
             bot.sendMessage({
                   to: channelID,
-                  message: 'Début de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ' !'
+                  message: 'C\'est partiiiiiiiiiiiiii !\nDébut de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ' !'
             });
           
             //Schedule the end of the WW
@@ -83,7 +83,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, nbr_minu
                //Message end of the WW
                bot.sendMessage({
                      to: channelID,
-                     message: 'Fin de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ' !'
+                     message: 'Stop !\nFin de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ' !'
                });
                   
                delete_ww(name_ww);
@@ -195,9 +195,21 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
             
             case 'wwall':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'Pour supprimer une Word War : ```!wwkill nomDeLaWW```'
+                var arrayLength = list_ww.length;
+                var message_to_display = "";
+                for (var i = 0; i < arrayLength; i++) {
+                    var name_i = list_ww[0];
+                    var deb_i = list_ww[1];
+                    var fin_i = list_ww[2];
+                    
+                    var deb_i_display = deb_i.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+                    var fin_i_display = fin_i.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+                    
+                    message_to_display += "WW " + name_i + " de " + deb_i_display " à " + fin_i_display + "\n";
+                }
+                    bot.sendMessage({
+                        to: channelID,
+                        message: message_to_display
                 });
                 break;
          }
