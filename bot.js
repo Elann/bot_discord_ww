@@ -152,12 +152,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     
                     //Add WW to list
                     list_ww.push([name_ww, heure_deb_ww, heure_fin_ww]);
-                     
                     
                     console.log(list_ww);
                     
                     //begin and end of the WW
-                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min);
+                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww);
                 
                 }
                 else {
