@@ -143,8 +143,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 
                 //Get runners
                 if (args.length >= 5) {
-                    var size_list = args.length-1;
-                    var runners = args[4:size_list];
+                    //var size_list = args.length-1;
+                    var runners = args.slice(4, -1);
                 }
                 else {
                     var runners = [];
