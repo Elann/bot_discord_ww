@@ -216,15 +216,20 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
                 
             case 'wwjoin':
-                if (args.length >= 2) {
+                if (args.length >= 3) {
                     var name_to_add = args[1];
                     var runners_to_add = args.slice(2);
                     if (is_in_list_ww(name_to_add)) {
-                        list_ww[index_ww(name_to_add)][3].concat(runners_to_add);
+                        
+                        var old_list_runners = list_ww[index_ww(name_to_add)][3];
+                        var new_list_runners = old_list_runners.concat(runners_to_add);
+                        list_ww[index_ww(name_to_add)][3] = new_list_runners;
+                        
                         bot.sendMessage({
                             to: channelID,
-                            message: 'Participant⋅e⋅s ajouté⋅e⋅s !'
+                            message: 'Les participant⋅e⋅s ont été ajouté⋅e⋅s !'
                         });
+                        console.log("participants " + list_ww);
                     }
                     else {
                         break;
