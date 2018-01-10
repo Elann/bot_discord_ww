@@ -41,7 +41,7 @@ function delete_ww(name) {
         }
     }
     if (index > -1) {
-        array.splice(index, 1);
+        list_ww.splice(index, 1);
     }
 }
 
