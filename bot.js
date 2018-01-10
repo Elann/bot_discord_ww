@@ -205,7 +205,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     var deb_i_display = deb_i.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
                     var fin_i_display = fin_i.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
                     
-                    message_to_display = message_to_display + "WW " + name_i + " de " + deb_i_display " à " + fin_i_display + "\n";
+                    message_to_display = message_to_display + "WW " + name_i + " de " + deb_i_display + " à " + fin_i_display + "\n";
                 }
                     bot.sendMessage({
                         to: channelID,
