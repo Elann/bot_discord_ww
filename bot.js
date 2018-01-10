@@ -45,6 +45,46 @@ function delete_ww(name) {
     }
 }
 
+function is_in_list_ww(name) {
+    var arrayLength = list_ww.length;
+    for (var i = 0; i < arrayLength; i++) {
+        if (list_ww[i][0] == name) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function deb_and_end_ww(name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min) {
+    //Schedule the beginning of the WW
+    schedule.scheduleJob('WW', heure_deb_ww, function(params)
+    {
+        if (is_in_list_ww(name_ww)) {
+        
+          //Message beginning of the WW
+          bot.sendMessage({
+                to: channelID,
+                message: 'Début de la WW de ' + deb_hour + 'h' + deb_min + ' ! Fin prévue à ' + fin_hour + 'h' + fin_min + ' !'
+          });
+          
+            //Schedule the end of the WW
+            schedule.scheduleJob('WW', heure_fin_ww, function(params)
+            {
+              //Message end of the WW
+              bot.sendMessage({
+                    to: channelID,
+                    message: 'Fin de la WW de ' + deb_hour + 'h' + deb_min + ' à ' + fin_hour + 'h' + fin_min + ' !'
+              });
+              
+              delete_ww(name_ww);
+              console.log(list_ww);
+
+            }.bind(null, null));
+
+        }.bind(null, null));
+      }
+}
+
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
@@ -121,30 +161,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     
                     console.log(list_ww);
                     
-                    //Schedule the beginning of the WW
-                    schedule.scheduleJob('WW', heure_deb_ww, function(params)
-                    {
-                      //Message beginning of the WW
-                      bot.sendMessage({
-                            to: channelID,
-                            message: 'Début de la WW de ' + deb_hour + 'h' + deb_min + ' ! Fin prévue à ' + fin_hour + 'h' + fin_min + ' !'
-                      });
-
-                    }.bind(null, null));
-                    
-                    //Schedule the end of the WW
-                    schedule.scheduleJob('WW', heure_fin_ww, function(params)
-                    {
-                      //Message end of the WW
-                      bot.sendMessage({
-                            to: channelID,
-                            message: 'Fin de la WW de ' + deb_hour + 'h' + deb_min + ' à ' + fin_hour + 'h' + fin_min + ' !'
-                      });
-                      
-                      delete_ww(name_ww);
-                      console.log(list_ww);
-
-                    }.bind(null, null));
+                    deb_and_end_ww(name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, fin_hour, fin_min);
                 
                 }
                 else {
