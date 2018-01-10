@@ -157,12 +157,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     //Add WW to list
                     var heure_deb_to_display = heure_deb_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
                     var heure_fin_to_display = heure_fin_ww.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+                    
                     list_ww.push([name_ww, heure_deb_to_display, heure_fin_to_display]);
                     
                     console.log(list_ww);
                     
                     //begin and end of the WW
-                    deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, nbr_minutes_ww);
+                    deb_and_end_ww(channelID, name_ww, heure_deb_to_display, heure_fin_to_display, nbr_minutes_ww);
                 
                 }
                 else {
