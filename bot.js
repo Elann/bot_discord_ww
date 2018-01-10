@@ -144,14 +144,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 //Get runners
                 if (args.length >= 5) {
                     //var size_list = args.length-1;
-                    var runners = args.slice(4, -1);
+                    var runners = args.slice(4);
                 }
                 else {
                     var runners = [];
                 }
                 
                 //Hour and minutes are between 0-24 and 0-59
-                if (hour >= 0 && hour < 25 && minutes >=0 && minutes < 60) {
+                if (hour >= 0 && hour < 25 && minutes >=0 && minutes < 60 && nbr_minutes_ww != NaN) {
                 
                     var heure_deb_ww = new Date();
                     heure_deb_ww.setHours(hour, minutes, 0);
