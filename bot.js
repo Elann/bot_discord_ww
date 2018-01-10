@@ -61,28 +61,29 @@ function deb_and_end_ww(name_ww, heure_deb_ww, heure_fin_ww, deb_hour, deb_min, 
     {
         if (is_in_list_ww(name_ww)) {
         
-          //Message beginning of the WW
-          bot.sendMessage({
-                to: channelID,
-                message: 'Début de la WW de ' + deb_hour + 'h' + deb_min + ' ! Fin prévue à ' + fin_hour + 'h' + fin_min + ' !'
-          });
+            //Message beginning of the WW
+            bot.sendMessage({
+                  to: channelID,
+                  message: 'Début de la WW de ' + deb_hour + 'h' + deb_min + ' ! Fin prévue à ' + fin_hour + 'h' + fin_min + ' !'
+            });
           
             //Schedule the end of the WW
             schedule.scheduleJob('WW', heure_fin_ww, function(params)
             {
-              //Message end of the WW
-              bot.sendMessage({
-                    to: channelID,
-                    message: 'Fin de la WW de ' + deb_hour + 'h' + deb_min + ' à ' + fin_hour + 'h' + fin_min + ' !'
-              });
-              
-              delete_ww(name_ww);
-              console.log(list_ww);
+               //Message end of the WW
+               bot.sendMessage({
+                     to: channelID,
+                     message: 'Fin de la WW de ' + deb_hour + 'h' + deb_min + ' à ' + fin_hour + 'h' + fin_min + ' !'
+               });
+                  
+               delete_ww(name_ww);
+               console.log(list_ww);
 
             }.bind(null, null));
 
-        }.bind(null, null));
-      }
+        }
+        
+      }.bind(null, null));
 }
 
 bot.on('message', function (user, userID, channelID, message, evt) {
