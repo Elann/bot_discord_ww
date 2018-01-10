@@ -71,7 +71,7 @@ function deb_and_end_ww(channelID, name_ww, heure_deb_ww, heure_fin_ww, heure_de
             //Message beginning of the WW
             bot.sendMessage({
                   to: channelID,
-                  message: 'C\'est partiiiiiiiiiiiiii !\nDébut de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + runners + ' !' 
+                  message: 'C\'est partiiiiiiiiiiiiii !\nDébut de la WW ' + name_ww + ' de ' + heure_deb_to_display + ' à ' + heure_fin_to_display + ', ' + runners.join(', ') + ' !' 
             });
           
             //Schedule the end of the WW
