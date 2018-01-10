@@ -140,11 +140,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                             to: channelID,
                             message: 'Fin de la WW de ' + deb_hour + 'h' + deb_min + ' à ' + fin_hour + 'h' + fin_min + ' !'
                       });
+                      
+                      delete_ww(name_ww);
+                      console.log(list_ww);
 
                     }.bind(null, null));
-                    
-                    delete_ww(name_ww);
-                    console.log(list_ww);
+                
                 }
                 else {
                     bot.sendMessage({
